@@ -1,0 +1,88 @@
+/* .mainCard {
+    height: 75%;
+    width: 300px;
+    background-color: #c71e1e;
+    margin-top: 40%;
+    margin: 30px;
+    flex: 0 0 225px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mainCard img {
+    height: 450px;
+    object-fit: cover;
+}
+
+.text1{
+    color: white;
+    font-size: xx-larger;
+}
+
+
+.mainCard {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    box-shadow: 0px 0px 10px 5px gold; 
+  }
+  
+  .mainCard:hover {
+    transform: scale(1.1);
+    filter: brightness(120%);
+    box-shadow: 0px 0px 20px 10px gold;
+  }
+  
+
+   */
+
+   .mainCard {
+    height: 75%;
+    width: 300px;
+    background-color: #c71e1e;
+    margin-top: 40%;
+    margin: 30px;
+    flex: 0 0 225px;
+    border-radius: 20px;
+    position: relative;
+    overflow: hidden;
+}
+
+.mainCard img {
+    height: 450px;
+    object-fit: cover;
+}
+
+.text1{
+    color: white;
+    font-size: xx-larger;
+}
+
+
+  
+  .mainCard {
+    transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    box-shadow: 0px 0px 10px 5px gold;
+  }
+  
+  .mainCard:hover {
+    transform: scale(1.1);
+    filter: brightness(120%);
+    box-shadow: 0px 0px 20px 10px gold;
+
+  }
+ 
+  .mainCard.blue-glow:hover {
+    box-shadow: 0px 0px 20px 10px blue; 
+  }
+  
+  .mainCard.green-glow:hover {
+    box-shadow: 0px 0px 20px 10px green; 
+  }
+  
+  .mainCard.golden-glow:hover {
+    box-shadow: 0px 0px 20px 10px red; 
+  }
+  
+
+
+  
