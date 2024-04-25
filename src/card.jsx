@@ -25,7 +25,6 @@
 //     </div>
 //   );
 // }
-
 // export default Card;
 
 
