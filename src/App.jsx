@@ -36,6 +36,7 @@ function App() {
 
     const usersRef = firebase.database().ref("users");
 
+    
     const onDataChange = (snapshot) => {
       const userData = snapshot.val();
       console.log("Database:", userData); // Log database object
