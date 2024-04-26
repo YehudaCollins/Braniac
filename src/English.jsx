@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import "./English.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faChevronLeft, faChevronRight } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft, faChevronRight,faLock } from '@fortawesome/free-solid-svg-icons';
 
 
 function English() {
   const backgroundImageStyle = {
-    backgroundImage: `url("https://st4.depositphotos.com/4874705/24906/i/450/depositphotos_249066518-stock-photo-dark-red-hexagon-background-and.jpg")`,
+    backgroundImage: `url("https://w0.peakpx.com/wallpaper/573/411/HD-wallpaper-red-hexagons-3d-art-hexagons-texture-creative-macro-honeycomb-red-hexagons-background-hexagons-textures-red-backgrounds-hexagons-patterns.jpg")`,
   };
 
   const levelsEnglish = [];
@@ -49,9 +49,15 @@ function English() {
 }
 
 function InsideCardEnglish({ levelEnglis }) {
+  const backgroundImageStyle = {
+    backgroundImage: `url("https://img.freepik.com/free-vector/abstract-glowing-terrain-line-wallpaper-modern-backdrop-vector_1017-45742.jpg")`,
+  };
   return (
-    <div className="InsideCardEnglish">
-      ID: {levelEnglis.id}, Lock: {levelEnglis.lock.toString()}
+    <div className="InsideCardEnglish" style={backgroundImageStyle}>
+      <br></br>
+      <div className="id">{levelEnglis.id}</div>
+      <div className="lock"><FontAwesomeIcon icon={faLock} /></div>
+       {/* Lock: {levelEnglis.lock.toString()} */}
     </div>
   );
 }
