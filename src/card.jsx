@@ -64,10 +64,12 @@ function Card({ card }) {
     <div>
       <div className={`mainCard ${getGlowClass()}`}>
       <Link to={getPageLink()}>
+      <h1 className="text1">{card.name}</h1>
         <img src={card.imageUrl} alt={card.name} />
       </Link>
-      <h1 className="text1">{card.name}</h1>
+      
       </div>
+      
     </div>
   );
 }
