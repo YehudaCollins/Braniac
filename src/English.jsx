@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import "./English.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight,faLock } from '@fortawesome/free-solid-svg-icons';
+import "./levels.css";
 
 
 function English() {
@@ -14,33 +14,33 @@ function English() {
     levelsEnglish.push({ id: i, lock: false });
   }
 
-  const [showNextSet, setShowNextSet] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
+  const [MovelLevel, setMovelLevel] = useState(false);
+  const [levelLocation, setLevelLocation] = useState(0);
 
-  const handleNextSet = () => {
-    setCurrentIndex((prevIndex) => Math.min(prevIndex + 10, levelsEnglish.length - 10));
-    setShowNextSet(true);
+  const buttonRight = () => {
+    setLevelLocation((prevIndex) => Math.min(prevIndex + 10, levelsEnglish.length - 10));
+    setMovelLevel(true);
   };
 
-  const handlePrevSet = () => {
-    setCurrentIndex((prevIndex) => Math.max(prevIndex - 10, 0));
-    setShowNextSet(false);
+  const buttonleft = () => {
+    setLevelLocation((prevIndex) => Math.max(prevIndex - 10, 0));
+    setMovelLevel(false);
   };
 
   return (
     <div className="main-English">
       <div className="main-English-inside" style={backgroundImageStyle}>
-        <div className={`level-english${showNextSet ? " slide-left" : " slide-right"}`}>
-          {levelsEnglish.slice(currentIndex, currentIndex + 10).map((levelEnglis) => (
+        <div className={`level-main${MovelLevel ? " slide-left" : " slide-right"}`}>
+          {levelsEnglish.slice(levelLocation, levelLocation + 10).map((levelEnglis) => (
             <InsideCardEnglish key={levelEnglis.id} levelEnglis={levelEnglis} />
           ))}
         </div>
         <div className="navigation-buttons">
-          <button className="buttonleft" onClick={handlePrevSet}>
+          <button className="buttonleft" onClick={buttonleft}>
           <FontAwesomeIcon icon={faChevronLeft} />
           </button>
-          <button className="buttonrite" onClick={handleNextSet}>
-          <FontAwesomeIcon className="buttonrite" icon={faChevronRight} />
+          <button className="buttonright" onClick={buttonRight}>
+          <FontAwesomeIcon className="buttonright" icon={faChevronRight} />
           </button>
         </div>
       </div>

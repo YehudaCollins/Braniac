@@ -4,11 +4,11 @@ import Card from "./card";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import cards from "./cardDeta";
-import Math from "./Math";
+import Mathh from "./Math";
 import English from "./English";   
 import Shapes from "./shapes"; 
 import "./App.css"; 
-import "./English.css";
+import "./levels.css";
 import "./Math.css";
 import "./Shapes.css";
 
@@ -69,7 +69,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/Math" element={<Math />} />
+          <Route path="/Math" element={<Mathh />} />
           <Route path="/English" element={<English />} />
           <Route path="/Shapes" element={<Shapes />} />
         </Routes>
