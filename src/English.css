@@ -12,7 +12,7 @@
   width: 95vw;
   border-radius: 50px;
   box-shadow: 0px 0px 20px 10px red;
-  background-size: cover;
+  background-size: cover;  
 }
 
 .level-english {
@@ -38,8 +38,7 @@
 }
 
 .InsideCardEnglish {
-  height: 310px;
-  width: 200px;
+  height: 40vh;
   background-color: #c71e1e;
   margin-top: 3vh;
   flex: 0 0 225px;
