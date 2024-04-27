@@ -119,12 +119,10 @@
 }
 
 .navigation-buttons {
-  position: absolute;
   display: flex;
   justify-content: space-between;
-  top: 50vh;
-  left: 4vw;
-  gap: 152vh;
+  margin-top: -28%;
+  padding: 1%;
 }
 
 .buttonleft,
