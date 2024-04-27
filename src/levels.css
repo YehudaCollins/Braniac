@@ -117,16 +117,20 @@
   transform: scale(1.05);
   filter: brightness(130%);
 }
-
+ 
 .navigation-buttons {
-  position: absolute;
+  position: fixed;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   top: 50%;
   transform: translateY(-50%);
-  right: 4vw; 
-  gap: 78rem; 
+  right: 2rem; /* Adjust as needed */
+  left: 2rem; /* Adjust as needed */
+  gap: 2rem; /* Adjust the gap between buttons */
+  z-index: 1000; /* Ensure it's above other content */
 }
+
 
 
 .buttonleft,
