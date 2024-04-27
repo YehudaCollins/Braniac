@@ -202,3 +202,40 @@
   border: none;
   position: absolute;
 }
+@media screen and (max-width: 768px) {
+  .main-English,
+  .main-Math,
+  .main-Shapes {
+    height: auto;
+    min-height: 100vh;
+  }
+
+  .level-main {
+    gap: 1vw;
+    margin-top: 1vh;
+  }
+
+  .InsideCardEnglish,
+  .InsideCardMath,
+  .InsideCardShapes {
+    flex: 0 0 45vw; /* Adjust the width as needed */
+    height: 30vh; /* Adjust the height as needed */
+  }
+
+  .buttonleft,
+  .buttonright {
+    font-size: 6vw;
+  }
+
+  .id,
+  .idMath,
+  .lock,
+  .lockMath,
+  .end,
+  .endMath,
+  .lock1,
+  .lock1Math {
+    font-size: 2rem;
+    margin-top: 5px; /* Adjust spacing as needed */
+  }
+}
