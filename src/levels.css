@@ -119,11 +119,15 @@
 }
 
 .navigation-buttons {
+  position: absolute;
   display: flex;
   justify-content: space-between;
-  margin-top: -28%;
-  padding: 1%;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 4vw; 
+  gap: 78rem; 
 }
+
 
 .buttonleft,
 .buttonright {
