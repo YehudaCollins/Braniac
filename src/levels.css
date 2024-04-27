@@ -15,6 +15,15 @@
   height: 100vh;
   width: 100vw;
 }
+
+.main-Shapes {
+  background-color: rgb(18, 63, 18);
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  height: 100vh;
+  width: 100vw;
+}
  
 .main-English-inside {
   height: 96vh;
@@ -29,6 +38,14 @@
   width: 95vw;
   border-radius: 50px;
   box-shadow: 0px 0px 20px 10px rgb(71, 32, 208);
+  background-size: cover; 
+}
+
+.main-Shapes-inside{
+  height: 96vh;
+  width: 95vw;
+  border-radius: 50px;
+  box-shadow: 0px 0px 20px 10px rgb(8, 173, 82);
   background-size: cover; 
 }
 
@@ -80,6 +97,21 @@
 
 }
 
+.InsideCardShapes{
+  height: 40vh;
+  background-color: #c71e1e;
+  margin-top: 3vh;
+  flex: 0 0 15vw;
+  border-radius: 9px;
+  position: relative;
+  overflow: hidden;
+  background-size: 70vh;
+  box-shadow: 0px 0px 10px 5px rgb(5, 144, 72); 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease;
+
+}
+
+.InsideCardShapes:hover,
 .InsideCardEnglish:hover,
 .InsideCardMath:hover{
   transform: scale(1.05);
@@ -104,7 +136,7 @@
   color: blue;
   font-size: 4vw;
 }
-
+ 
 .buttonleft:hover,
 .buttonright:hover {
   color: rgb(123, 123, 214);
@@ -123,8 +155,7 @@
 .lock{
   color: rgb(125, 118, 221);
   font-size: 4rem;
-  margin-top: 10vh;
-
+  margin-top: 7vh;
 }
 
 .lockMath{
@@ -132,4 +163,42 @@
   font-size: 4rem;
   margin-top: 10vh;
 
+}
+
+.end{
+  color: rgb(125, 118, 221);
+  font-size: 3rem;
+  margin-top: 3vh;
+  background-color:rgba(255, 255, 255, 0);
+  border: none;
+
+}
+
+.endMath{
+  color: rgb(206, 175, 216);
+  font-size: 3rem;
+  margin-top: 3vh;
+  background-color:rgba(255, 255, 255, 0);
+  border: none;
+
+}
+
+.lock1{
+  color: rgb(125, 118, 221);
+  font-size: 4rem;
+  margin-top: -9vh;
+  margin-left: -2vw;
+  background-color:rgba(255, 255, 255, 0);
+  border: none;
+  position: absolute;
+}
+
+.lock1Math{
+  color: rgb(206, 175, 216);
+  font-size: 4rem;
+  margin-top: -9vh;
+  margin-left: -2vw;
+  background-color:rgba(255, 255, 255, 0);
+  border: none;
+  position: absolute;
 }

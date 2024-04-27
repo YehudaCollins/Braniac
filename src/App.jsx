@@ -9,8 +9,6 @@ import English from "./English";
 import Shapes from "./shapes"; 
 import "./App.css"; 
 import "./levels.css";
-import "./Math.css";
-import "./Shapes.css";
 
 
 
