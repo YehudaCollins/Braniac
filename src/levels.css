@@ -125,10 +125,10 @@
   align-items: center;
   top: 50%;
   transform: translateY(-50%);
-  right: 2rem; /* Adjust as needed */
-  left: 2rem; /* Adjust as needed */
-  gap: 2rem; /* Adjust the gap between buttons */
-  z-index: 1000; /* Ensure it's above other content */
+  right: 3rem;
+  left: 3rem; 
+  gap: 2rem;
+  z-index: 1000;
 }
 
 
