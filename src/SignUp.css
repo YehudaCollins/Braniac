@@ -61,6 +61,7 @@
     color: white;
     height: 5vh;
     width: 20vw; 
+    transition: transform 0.3s;
 
 }
 
@@ -72,4 +73,16 @@
     color: white;
     height: 5vh;
     width: 20vw;
+    transition: transform 0.3s;
+
+}
+
+
+.buttonlogin:hover,
+.buttonsignup:hover{
+
+    transform: scale(1.04);
+    background-color: rgb(120, 8, 8);
+
+
 }
