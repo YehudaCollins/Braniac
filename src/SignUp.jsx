@@ -38,7 +38,7 @@ function SignUp(){
           </div>
         ) : (
           <div>
-            <h2 className="textmain">Register</h2>
+            <h2 className="textmain">SignUp</h2>
             <form className='Login'>
               <input
                 className='inpet'
