@@ -27,9 +27,9 @@ function SignUp() {
       <>
         <div className="main-Websitedetails">
           <div className="picters">
-            <img src="/Photos/1.png"  alt="Picture 1" className="picture" />
-            <img src="/Photos/5.png" alt="Picture 2" className="picture" />
-            <img src="/Photos/4.png" alt="Picture 3" className="picture" />
+          <img src="/Photos/1.png" alt="1" className="picture" /> 
+          <img src="/Photos/5.png" alt="2" className="picture" />
+          <img src="/Photos/4.png" alt="3" className="picture" />
           </div>
           <div className="Websitedetails">
             <h1 className="Websitedetails-text">The Best and Fun Way for Children to Learn</h1>
