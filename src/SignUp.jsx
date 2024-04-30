@@ -87,13 +87,7 @@ function SignUp() {
                   className='inpet'
                   type="text"
                   name="name"
-                  placeholder="First Name"
-                />
-                <input
-                  className='inpet'
-                  type="text"
-                  name="lastName"
-                  placeholder="Last Name"
+                  placeholder="Full Name"
                 />
                 <div className='label'>
                   <label>
@@ -126,6 +120,12 @@ function SignUp() {
                   type="password"
                   name="password"
                   placeholder="Password"
+                />
+                    <input
+                  className='inpet'
+                  type="password"
+                  name="password"
+                  placeholder="Verify password"
                 />
                 <button className="buttonsignup" type="submit">SignUp</button>
                 <p><button className="buttonsignup" onClick={toggleForm}>Already have an account?</button></p>
