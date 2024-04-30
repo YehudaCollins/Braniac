@@ -7,6 +7,8 @@ import cards from "./cardDeta";
 import Mathh from "./Math";
 import English from "./English";   
 import Shapes from "./shapes"; 
+import SignUp from "./SignUp";
+import "./SignUp.css";
 import "./App.css"; 
 import "./levels.css";
 
@@ -31,6 +33,7 @@ function App() {
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
+
 
     const usersRef = firebase.database().ref("users");
 
@@ -66,7 +69,8 @@ function App() {
  
       <Router>
         <Routes>
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<SignUp />} />
+          <Route path="/h" element={<Home />} />
           <Route path="/Math" element={<Mathh />} />
           <Route path="/English" element={<English />} />
           <Route path="/Shapes" element={<Shapes />} />
