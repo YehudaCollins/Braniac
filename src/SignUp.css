@@ -53,18 +53,8 @@
     color: rgb(117, 117, 117);
 }
 
-.buttonlogin{
-    background-color: rgb(131, 11, 11);
-    border-radius: 8px;
-    outline: none;
-    border: none;
-    color: white;
-    height: 5vh;
-    width: 20vw; 
-    transition: transform 0.3s;
 
-}
-
+.buttonlogin,
 .buttonsignup{
     background-color: rgb(131, 11, 11);
     border-radius: 8px;
@@ -77,7 +67,7 @@
 
 }
 
-
+.button1:hover,
 .buttonlogin:hover,
 .buttonsignup:hover{
 
@@ -85,4 +75,90 @@
     background-color: rgb(120, 8, 8);
 
 
+}
+
+
+
+.main-Websitedetails {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5vh;
+    align-items: center;
+    justify-content: center;
+  }
+
+
+
+  .Websitedetails {
+    height: 60vh;
+    width: 50vw;
+    text-align: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+    margin-right: 5%;
+  }
+
+  .picters {
+    height: 20vh;
+    width: 50vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .picture {
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  }
+  
+
+  .Websitedetails-text {
+    font-size: 27px;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+  }
+
+  .colors {
+    display: flex;
+    flex-direction: row;
+    font-size: x-large;
+    text-align: center;
+    justify-content: center;
+    font-family: 'Arial', sans-serif;
+    margin-bottom: 20px;
+    gap: 3%;
+  }
+
+
+.color1{color: blue;}
+
+.color2{color: red;}
+
+.color3{color: green;}
+
+
+.Websitedetails-text2 {
+  font-size: large;
+  font-family: 'Arial', sans-serif;
+  margin-bottom: 20px;
+}
+
+
+.button1{
+    margin-bottom: 5vh;
+    background-color: rgb(131, 11, 11);
+    border-radius: 8px;
+    outline: none;
+    border: none;
+    color: white;
+    height: 5vh;
+    width: 20vw;
+    transition: transform 0.3s;
 }
