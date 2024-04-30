@@ -70,7 +70,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<SignUp />} />
-          <Route path="/h" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Math" element={<Mathh />} />
           <Route path="/English" element={<English />} />
           <Route path="/Shapes" element={<Shapes />} />

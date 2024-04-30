@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const navigate = useNavigate();
 
   const handleClick = () => {
     setShowForm(true);
@@ -11,6 +12,17 @@ function SignUp() {
 
   const toggleForm = () => {
     setShowLogin(!showLogin);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    /*
+
+      הרשאות לפני שיכול להיכנס כאן
+
+
+    */
+    navigate('/Home'); 
   };
 
   const backgroundImageStyle = {
@@ -24,39 +36,39 @@ function SignUp() {
       </div>
 
       {!showForm && (
-      <>
-        <div className="main-Websitedetails">
-          <div className="picters">
-          <img src="/Photos/1.png" alt="1" className="picture" /> 
-          <img src="/Photos/5.png" alt="2" className="picture" />
-          <img src="/Photos/4.png" alt="3" className="picture" />
+        <>
+          <div className="main-Websitedetails">
+            <div className="picters">
+              <img src="/Photos/1.png" alt="1" className="picture" />
+              <img src="/Photos/5.png" alt="2" className="picture" />
+              <img src="/Photos/4.png" alt="3" className="picture" />
+            </div>
+            <div className="Websitedetails">
+              <h1 className="Websitedetails-text">The Best and Fun Way for Children to Learn</h1>
+              <div className="colors">
+                <h3 className="color1">English</h3>
+                <h3 className="color2">Math</h3>
+                <h3 className="color3">shapes</h3>
+              </div>
+              <p className="Websitedetails-text2">
+                Brainiac is a special website that helps kids learn through fun games. Parents and teachers can make their own exercises, and the website turns them into super cool games that help kids get better at things like English, math, and shapes - all while having a great time playing!
+              </p>
+              <br></br>
+              <h2 className="Websitedetails-text">
+                The site is completely free. All that remains is to start playing and enjoy learning!
+              </h2>
+            </div>
           </div>
-          <div className="Websitedetails">
-            <h1 className="Websitedetails-text">The Best and Fun Way for Children to Learn</h1>
-            <div className="colors">
-            <h3 className="color1">English</h3>
-            <h3 className="color2">Math</h3>
-            <h3 className="color3">shapes</h3>
-          </div>
-          <p className="Websitedetails-text2">
-            Brainiac is a special website that helps kids learn through fun games. Parents and teachers can make their own exercises, and the website turns them into super cool games that help kids get better at things like English, math, and shapes - all while having a great time playing!
-          </p>
-          <br></br>
-          <h2 className="Websitedetails-text">
-            The site is completely free. All that remains is to start playing and enjoy learning!
-          </h2>
-          </div>
-        </div>
           <button className="button1" onClick={handleClick}>Enter the game</button>
-      </>
+        </>
       )}
-      
+
       {showForm && (
         <div>
           {showLogin ? (
             <div>
               <h2 className="textmain">Login</h2>
-              <form className='Login'>
+              <form className='Login' onSubmit={handleSubmit}>
                 <input
                   className='inpet'
                   type="email"
@@ -76,7 +88,7 @@ function SignUp() {
           ) : (
             <div>
               <h2 className="textmain">SignUp</h2>
-              <form className='Login'>
+              <form className='Login' onSubmit={handleSubmit}>
                 <input
                   className='inpet'
                   type="email"
@@ -121,7 +133,7 @@ function SignUp() {
                   name="password"
                   placeholder="Password"
                 />
-                    <input
+                <input
                   className='inpet'
                   type="password"
                   name="password"
