@@ -1,10 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/database";
 
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    // Initialize Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQcK6mjBoOow8p0vw0_IHjAXtZIYvksWk",
+      authDomain: "braniac-f455c.firebaseapp.com",
+      databaseURL: "https://braniac-f455c-default-rtdb.firebaseio.com",
+      projectId: "braniac-f455c",
+      storageBucket: "braniac-f455c.appspot.com",
+      messagingSenderId: "404956277459",
+      appId: "1:404956277459:web:67f78249db064dad944226"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
+
+    // Initialize Firebase Authentication
+    firebase.auth();
+  }, []);
 
   const handleClick = () => {
     setShowForm(true);
@@ -14,15 +37,37 @@ function SignUp() {
     setShowLogin(!showLogin);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    /*
 
-      הרשאות לפני שיכול להיכנס כאן
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+    const name = e.target.elements.name?.value || "";
+    const gender = e.target.elements.gender?.value || "";
+    const age = e.target.elements.age?.value || "";
 
+    try {
+      // יוצר איימייל חדש עם ססמה
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
 
-    */
-    navigate('/Home'); 
+      // מכניס את המידע
+      const database = firebase.database();
+      const usersRef = database.ref("users");
+      const newUserRef = usersRef.child(user.uid); // Use user.uid as the key
+      await newUserRef.set({
+        email,
+        name,
+        gender,
+        age,
+      });
+
+      // נכנס לאתר לאחר שהכל הסתיים בהצלחה
+      navigate("/Home");
+    } catch (error) {
+      console.error("Authentication error:", error);
+      alert(error.message);
+    }
   };
 
   const backgroundImageStyle = {
@@ -136,7 +181,7 @@ function SignUp() {
                 <input
                   className='inpet'
                   type="password"
-                  name="password"
+                  name="verifyPassword"
                   placeholder="Verify password"
                 />
                 <button className="buttonsignup" type="submit">SignUp</button>
