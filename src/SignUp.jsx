@@ -37,8 +37,9 @@ function SignUp() {
 
   const handleSubmit = async (e) => {
     //מונע מהכל להתאפס
-    e.preventDefault();  
-
+    e.preventDefault(); 
+    
+   //מקבל את המידע ומכניס במערך
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
     const name = e.target.elements.name?.value || "";
