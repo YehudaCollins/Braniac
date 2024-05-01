@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/database";
+import { validatePassword } from 'firebase/auth';
 
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
@@ -45,6 +46,14 @@ function SignUp() {
     const name = e.target.elements.name?.value || "";
     const gender = e.target.elements.gender?.value || "";
     const age = e.target.elements.age?.value || "";
+    
+    const verifyPassword = e.target.elements.verifyPassword.value;
+
+    // בדיקה אם הסיסמה ואימות הסיסמה תואמים
+  if (password !== verifyPassword) {
+    alert("The password does not match");
+    return;
+  }
 
     try {
       // יוצר איימייל חדש עם ססמה
@@ -69,10 +78,10 @@ function SignUp() {
       alert(error.message);
     }
   };
-
   const backgroundImageStyle = {
-    backgroundImage: url("https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg"),
+    backgroundImage: "url('https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg')",
   };
+  
 
   return (
     <div className="main-SignUp" style={backgroundImageStyle}>
@@ -184,7 +193,7 @@ function SignUp() {
                   name="verifyPassword"
                   placeholder="Verify password"
                 />
-                <button className="buttonsignup" type="submit">SignUp</button>
+                <button className="buttonsignup" type="submit" >SignUp</button>
                 <p><button className="buttonsignup" onClick={toggleForm}>Already have an account?</button></p>
               </form>
             </div>
