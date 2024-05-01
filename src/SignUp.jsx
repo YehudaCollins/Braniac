@@ -10,7 +10,6 @@ function SignUp() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    // Initialize Firebase
     const firebaseConfig = {
       apiKey: "AIzaSyAQcK6mjBoOow8p0vw0_IHjAXtZIYvksWk",
       authDomain: "braniac-f455c.firebaseapp.com",
@@ -25,7 +24,6 @@ function SignUp() {
       firebase.initializeApp(firebaseConfig);
     }
 
-    // Initialize Firebase Authentication
     firebase.auth();
   }, []);
 
