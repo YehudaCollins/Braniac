@@ -38,7 +38,8 @@ function SignUp() {
   };
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    //מונע מהכל להתאפס
+    e.preventDefault();  
 
     const email = e.target.elements.email.value;
     const password = e.target.elements.password.value;
