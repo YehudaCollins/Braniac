@@ -59,20 +59,20 @@ try {
   const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
   const user = userCredential.user;
 
-  
-      // מכניס את המידע ומכניס בשם יוזרס
-      const database = firebase.database();
-      const usersRef = database.ref("users");  
 
-      //שם לכל אחד שם מפתח על פי האימייל
-      const newUserRef = usersRef.child(name); 
-      
-      await newUserRef.set({
-        email,
-        name,
-        gender,
-        age,
-      });
+  // מכניס את המידע ומכניס בשם יוזרס
+  const database = firebase.database();
+  const usersRef = database.ref("users");  
+
+  //שם לכל אחד שם מפתח על פי האימייל
+  const newUserRef = usersRef.child(name); 
+  
+  await newUserRef.set({
+    email,
+    name,
+    gender,
+    age,
+  });
 
       // נכנס לאתר לאחר שהכל הסתיים בהצלחה
       navigate("/Home");
