@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
 import Card from "./card";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
@@ -70,7 +70,7 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<SignUp />} />
-          <Route path="/h" element={<Home />} />
+          <Route path="/Home" element={<Home />} />
           <Route path="/Math" element={<Mathh />} />
           <Route path="/English" element={<English />} />
           <Route path="/Shapes" element={<Shapes />} />
