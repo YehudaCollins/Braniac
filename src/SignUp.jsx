@@ -53,9 +53,9 @@ function SignUp() {
 
       // מכניס את המידע
       const database = firebase.database();
-      const usersRef = database.ref("users");
-      const newUserRef = usersRef.child(user.uid); // Use user.uid as the key
-      await newUserRef.set({
+      const usersRef = database.ref("users");  //מכניס במערך בשם יוזרס
+      const newUserRef = usersRef.child(user.uid); // נותן להם מפתח. תעשה טובה ותיצור מפתח שנראה יותר טוב
+      await newUserRef.set({  //מקבל את המידע
         email,
         name,
         gender,
