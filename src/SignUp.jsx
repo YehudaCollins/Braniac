@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
 
 function SignUp(){
     const [showLogin, setShowLogin] = useState(true);
@@ -9,7 +10,6 @@ function SignUp(){
 
     const backgroundImageStyle = {
       backgroundImage: `url("https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg")`,    };
-  
     return (
       <div className="main-SignUp" style={backgroundImageStyle}>
           <div className="titel">
@@ -18,6 +18,7 @@ function SignUp(){
           {showLogin ? (
           <div>
             <h2 className="textmain">Login</h2>
+            {/* <form className="Login" onSubmit={handleSubmit}></form> */}
             <form className='Login'>
               <input
                 className='inpet'
@@ -101,3 +102,6 @@ function SignUp(){
     );
   }
 export default SignUp;
+ניתן להסיר את הייבוא הבא
+import firebase from 'firebase'; // יבוא מהספרייה המרכזית של Firebase
+
