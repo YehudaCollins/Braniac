@@ -3,7 +3,6 @@ import { useNavigate } from 'react-router-dom';
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/database";
-import { validatePassword } from 'firebase/auth';
 
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
