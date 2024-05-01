@@ -1,8 +1,13 @@
+<<<<<<< HEAD
+import React, { useState } from 'react';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+=======
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 import "firebase/compat/database";
+>>>>>>> 66047e67031c1355849385ecc179703bdddaf4f4
 
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
@@ -20,9 +25,38 @@ function SignUp() {
       appId: "1:404956277459:web:67f78249db064dad944226"
     };
 
+<<<<<<< HEAD
+    const backgroundImageStyle = {
+      backgroundImage: `url("https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg")`,    };
+    return (
+      <div className="main-SignUp" style={backgroundImageStyle}>
+          <div className="titel">
+            <div className="text">Brainiac</div>
+          </div>
+          {showLogin ? (
+          <div>
+            <h2 className="textmain">Login</h2>
+            {/* <form className="Login" onSubmit={handleSubmit}></form> */}
+            <form className='Login'>
+              <input
+                className='inpet'
+                type="email"
+                name="email"
+                placeholder="Email"
+              />
+              <input
+                className='inpet'
+                type="password"
+                name="password"
+                placeholder="Password"
+              />
+              <button className='buttonlogin'  type="submit">Login</button>
+              <p><button className='buttonlogin' onClick={toggleForm}>Don't have an account? </button></p>
+=======
     if (!firebase.apps.length) {
       firebase.initializeApp(firebaseConfig);
     }
+>>>>>>> 66047e67031c1355849385ecc179703bdddaf4f4
 
     firebase.auth();
   }, []);
@@ -79,6 +113,14 @@ function SignUp() {
       <div className="titel">
         <div className="text">Brainiac</div>
       </div>
+<<<<<<< HEAD
+    );
+  }
+export default SignUp;
+ניתן להסיר את הייבוא הבא
+import firebase from 'firebase'; // יבוא מהספרייה המרכזית של Firebase
+
+=======
 
       {!showForm && (
         <>
@@ -196,3 +238,4 @@ function SignUp() {
 }
 
 export default SignUp;
+>>>>>>> 66047e67031c1355849385ecc179703bdddaf4f4
