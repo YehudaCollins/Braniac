@@ -40,51 +40,50 @@ function SignUp() {
     //מונע מהכל להתאפס
     e.preventDefault(); 
     
-   //מקבל את המידע ומכניס במערך
-    const email = e.target.elements.email.value;
-    const password = e.target.elements.password.value;
-    const name = e.target.elements.name?.value || "";
-    const gender = e.target.elements.gender?.value || "";
-    const age = e.target.elements.age?.value || "";
+  // מכניס את המידע
+const email = e.target.elements.email.value;
+const password = e.target.elements.password.value;
+const name = e.target.elements.name?.value || "";
+const gender = e.target.elements.gender?.value || "";
+const age = e.target.elements.age?.value || "";
 
-    const verifyPassword = e.target.elements.verifyPassword.value;
+const verifyPassword = e.target.elements.verifyPassword.value;
 
-    // בדיקה אם הסיסמה ואימות הסיסמה תואמים
-  if (password !== verifyPassword) {
-    alert("The password does not match");
-    return;
-  }
+// בדיקה אם הסיסמה ואימות הסיסמה תואמים
+if (password !== verifyPassword) {
+alert("The password does not match");
+return;
+}
 
 try {
   // יוצר איימייל חדש עם ססמה
   const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
   const user = userCredential.user;
 
-  // מכניס את המידע ומכניס בשם יוזרס
-  const database = firebase.database();
-  const usersRef = database.ref("users");  
-
-  //שם לכל אחד שם מפתח על פי האימייל
-  const newUserRef = usersRef.child(name); 
   
-  
-  await newUserRef.set({
-    email,
-    name,
-    gender,
-    age,
-  });
+      // מכניס את המידע ומכניס בשם יוזרס
+      const database = firebase.database();
+      const usersRef = database.ref("users");  
 
-  // נכנס לאתר לאחר שהכל הסתיים בהצלחה
-  navigate("/Home");
-} catch (error) {
-  console.error("Authentication error:", error);
-  alert(error.message);
-}
+      //שם לכל אחד שם מפתח על פי האימייל
+      const newUserRef = usersRef.child(name); 
+      
+      await newUserRef.set({
+        email,
+        name,
+        gender,
+        age,
+      });
 
+      // נכנס לאתר לאחר שהכל הסתיים בהצלחה
+      navigate("/Home");
+    } catch (error) {
+      console.error("Authentication error:", error);
+      alert(error.message);
+    }
   };
   const backgroundImageStyle = {
-    backgroundImage: "url('https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg')",
+    backgroundImage: url("https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg"),
   };
   
 
