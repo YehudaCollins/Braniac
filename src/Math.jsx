@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import "./levels.css";
@@ -85,6 +86,7 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   return (
     <div className="InsideCardMath" style={backgroundImageStyle}>
       <br />
+      <Link to="/unity" style={{ textDecoration: 'none' }}>
       <div className="idMath">{level.id}</div>
       {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
       {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
@@ -94,6 +96,8 @@ function InsideCard({ level, levels, index, levelCompleted }) {
            <FontAwesomeIcon icon={faPlay} />
         </button>
       )}
+       </Link>
     </div>
+    
   );}
 export default Mathh;

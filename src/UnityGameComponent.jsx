@@ -17,5 +17,5 @@ function UnityGameComponent(){
         </div>
       );
     };
-
+ 
 export default UnityGameComponent;

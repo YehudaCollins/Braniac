@@ -70,8 +70,8 @@ function App() {
  
       <Router>
         <Routes>
-          <Route path="/h" element={<SignUp />} />
-          <Route path="/" element={<UnityGameComponent />} />
+          <Route path="/" element={<SignUp />} />
+          <Route path="/unity" element={<UnityGameComponent />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Math" element={<Mathh />} />
           <Route path="/English" element={<English />} />
