@@ -91,7 +91,7 @@ function InsideCard({ level, levels, index, levelCompleted }) {
       {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
       {(isFirstLevel || isPreviousCompleted) && !level.completed && (
         <button className="lock1Math" onClick={handleClick}>
-           <FontAwesomeIcon icon={faPlay} />
+         <FontAwesomeIcon icon={faPlay} />
         </button>
       )}
       </Link>
