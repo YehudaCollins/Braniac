@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import "./levels.css";
@@ -81,8 +82,8 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const isFirstLevel = index === 0;
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
 
-  return (
-    <div className="InsideCardEnglish" style={backgroundImageStyle}>
+  const levelContent = (
+    <div className="LevelClick">
       <br />
       <div className="id">{level.id}</div>
       {level.lock && <div className="lock"><FontAwesomeIcon icon={faLock} /></div>}
@@ -90,8 +91,18 @@ function InsideCard({ level, levels, index, levelCompleted }) {
       {level.completed && <div className="end"><FontAwesomeIcon icon={faCheckCircle} /></div>}
       {(isFirstLevel || isPreviousCompleted) && !level.completed && (
         <button className="lock1" onClick={handleClick}>
-           <FontAwesomeIcon icon={faPlay} />
+          <FontAwesomeIcon icon={faPlay} />
         </button>
+      )}
+    </div>
+  );
+
+  return (
+    <div className="InsideCardEnglish" style={backgroundImageStyle}>
+      {!level.lock ? (
+        <Link to="/unity" style={{ textDecoration: 'none' }}>{levelContent}</Link>
+      ) : (
+        levelContent
       )}
     </div>
   );

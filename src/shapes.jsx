@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import "./levels.css";
+import { Link } from "react-router-dom";
 
 function Shapes() {
   const backgroundImageStyle = {
@@ -80,8 +81,8 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const isFirstLevel = index === 0;
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
 
-  return (
-    <div className="InsideCardEnglish" style={backgroundImageStyle}>
+  const levelContent = (
+    <div className="LevelClick">
       <br />
       <div className="idMath">{level.id}</div>
       {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
@@ -89,11 +90,20 @@ function InsideCard({ level, levels, index, levelCompleted }) {
       {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
       {(isFirstLevel || isPreviousCompleted) && !level.completed && (
         <button className="lock1Math" onClick={handleClick}>
-           <FontAwesomeIcon icon={faPlay} />
+          <FontAwesomeIcon icon={faPlay} />
         </button>
       )}
     </div>
   );
-}
 
+  return (
+    <div className="InsideCardShapes" style={backgroundImageStyle}>
+      {!level.lock ? (
+        <Link to="/unity" style={{ textDecoration: 'none' }}>{levelContent}</Link>
+      ) : (
+        levelContent
+      )}
+    </div>
+  );
+}
 export default Shapes;

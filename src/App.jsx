@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
+import UnityGameComponent from './UnityGameComponent';
 import Card from "./card";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
@@ -11,7 +12,7 @@ import SignUp from "./SignUp";
 import "./SignUp.css";
 import "./App.css"; 
 import "./levels.css";
-
+import "./unity.css";
 
 
 function App() {
@@ -70,14 +71,13 @@ function App() {
       <Router>
         <Routes>
           <Route path="/" element={<SignUp />} />
+          <Route path="/unity" element={<UnityGameComponent />} />
           <Route path="/Home" element={<Home />} />
           <Route path="/Math" element={<Mathh />} />
           <Route path="/English" element={<English />} />
           <Route path="/Shapes" element={<Shapes />} />
         </Routes>
       </Router>
-     
-
     
   );
 
