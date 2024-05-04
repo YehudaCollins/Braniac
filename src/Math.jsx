@@ -4,8 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import "./levels.css";
 
-
-
 function Mathh() {
   const backgroundImageStyle = {
     backgroundImage: `url("https://e0.pxfuel.com/wallpapers/81/418/desktop-wallpaper-abstract-technological-background-made-of-black-hexagons-with-purple-glow-seamless-loop-motion-background-dark-hexagon.jpg")`,
@@ -21,7 +19,7 @@ function Mathh() {
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
   const [levelData, setLevelData] = useState(levels);
 
-  //מזיז שלבים ימינה 
+  //מזיז שלבים ימינה
   const moveLevelsRight = () => {
     setCurrentLevelIndex((prevIndex) => Math.min(prevIndex + 10, levelData.length - 10));
     setIsMovingLevels(true);
@@ -33,7 +31,7 @@ function Mathh() {
     setIsMovingLevels(false);
   };
 
-  // מסיים לבל? פותח תלבל הבא 
+  // מסיים לבל? פותח תלבל הבא
   const levelCompleted = (levelIndex) => {
     const updatedLevels = [...levelData];
     updatedLevels[levelIndex].completed = true;
@@ -42,11 +40,11 @@ function Mathh() {
     }
     setLevelData(updatedLevels);
   };
-  
+
   return (
     <div className="main-Math">
       <div className="main-Math-inside" style={backgroundImageStyle}>
-      <div className={`level-main${isMovingLevels ? " slide-left" : " slide-right"}`}>
+        <div className={`level-main${isMovingLevels ? " slide-left" : " slide-right"}`}>
           {levelData.slice(currentLevelIndex, currentLevelIndex + 10).map((level, index) => (
             <InsideCard
               key={level.id}
@@ -67,7 +65,7 @@ function Mathh() {
         </div>
       </div>
     </div>
-  ); 
+  );
 }
 
 function InsideCard({ level, levels, index, levelCompleted }) {
@@ -83,18 +81,30 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const isFirstLevel = index === 0;
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
 
+  const levelContent = (
+    <div className="LevelClick">
+      <br />
+      <div className="idMath">{level.id}</div>
+      {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
+      {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
+      {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
+      {(isFirstLevel || isPreviousCompleted) && !level.completed && (
+        <button className="lock1Math" onClick={handleClick}>
+          <FontAwesomeIcon icon={faPlay} />
+        </button>
+      )}
+    </div>
+  );
+
   return (
-      <Link to="/unity" className="InsideCardMath" style={backgroundImageStyle}>
-        <br />
-        <div className="idMath">{level.id}</div>
-        {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
-        {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
-        {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
-        {(isFirstLevel || isPreviousCompleted) && !level.completed && (
-          <button className="lock1Math" onClick={handleClick}>
-            <FontAwesomeIcon icon={faPlay} />
-          </button>
-        )}
-       </Link>    
-  );}
+    <div className="InsideCardMath" style={backgroundImageStyle}>
+      {!level.lock ? (
+        <Link to="/unity" style={{ textDecoration: 'none' }}>{levelContent}</Link>
+      ) : (
+        levelContent
+      )}
+    </div>
+  );
+}
+
 export default Mathh;

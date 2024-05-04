@@ -82,19 +82,29 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const isFirstLevel = index === 0;
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
 
+  const levelContent = (
+    <div className="LevelClick">
+      <br />
+      <div className="id">{level.id}</div>
+      {level.lock && <div className="lock"><FontAwesomeIcon icon={faLock} /></div>}
+      {!level.lock && <div className="lock"><FontAwesomeIcon icon={faPlay} /></div>}
+      {level.completed && <div className="end"><FontAwesomeIcon icon={faCheckCircle} /></div>}
+      {(isFirstLevel || isPreviousCompleted) && !level.completed && (
+        <button className="lock1" onClick={handleClick}>
+          <FontAwesomeIcon icon={faPlay} />
+        </button>
+      )}
+    </div>
+  );
+
   return (
-      <Link to="/unity"  className="InsideCardEnglish" style={backgroundImageStyle}>
-        <br />
-        <div className="id">{level.id}</div>
-        {level.lock && <div className="lock"><FontAwesomeIcon icon={faLock} /></div>}
-        {!level.lock && <div className="lock"><FontAwesomeIcon icon={faPlay} /></div>}
-        {level.completed && <div className="end"><FontAwesomeIcon icon={faCheckCircle} /></div>}
-        {(isFirstLevel || isPreviousCompleted) && !level.completed && (
-          <button className="lock1" onClick={handleClick}>
-            <FontAwesomeIcon icon={faPlay} />
-          </button>
-        )}
-      </Link>
+    <div className="InsideCardEnglish" style={backgroundImageStyle}>
+      {!level.lock ? (
+        <Link to="/unity" style={{ textDecoration: 'none' }}>{levelContent}</Link>
+      ) : (
+        levelContent
+      )}
+    </div>
   );
 }
 
