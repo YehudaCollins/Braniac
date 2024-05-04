@@ -83,20 +83,18 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
 
   return (
-    <div className="InsideCardEnglish" style={backgroundImageStyle}>
-      <br />
-      <Link to="/unity" style={{ textDecoration: 'none' }}>
-      <div className="id">{level.id}</div>
-      {level.lock && <div className="lock"><FontAwesomeIcon icon={faLock} /></div>}
-      {!level.lock && <div className="lock"><FontAwesomeIcon icon={faPlay} /></div>}
-      {level.completed && <div className="end"><FontAwesomeIcon icon={faCheckCircle} /></div>}
-      {(isFirstLevel || isPreviousCompleted) && !level.completed && (
-        <button className="lock1" onClick={handleClick}>
-           <FontAwesomeIcon icon={faPlay} />
-        </button>
-      )}
+      <Link to="/unity"  className="InsideCardEnglish" style={backgroundImageStyle}>
+        <br />
+        <div className="id">{level.id}</div>
+        {level.lock && <div className="lock"><FontAwesomeIcon icon={faLock} /></div>}
+        {!level.lock && <div className="lock"><FontAwesomeIcon icon={faPlay} /></div>}
+        {level.completed && <div className="end"><FontAwesomeIcon icon={faCheckCircle} /></div>}
+        {(isFirstLevel || isPreviousCompleted) && !level.completed && (
+          <button className="lock1" onClick={handleClick}>
+            <FontAwesomeIcon icon={faPlay} />
+          </button>
+        )}
       </Link>
-    </div>
   );
 }
 

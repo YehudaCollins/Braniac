@@ -84,20 +84,17 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
 
   return (
-    <div className="InsideCardMath" style={backgroundImageStyle}>
-      <br />
-      <Link to="/unity" style={{ textDecoration: 'none' }}>
-      <div className="idMath">{level.id}</div>
-      {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
-      {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
-      {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
-      {(isFirstLevel || isPreviousCompleted) && !level.completed && (
-        <button className="lock1Math" onClick={handleClick}>
-           <FontAwesomeIcon icon={faPlay} />
-        </button>
-      )}
-       </Link>
-    </div>
-    
+      <Link to="/unity" className="InsideCardMath" style={backgroundImageStyle}>
+        <br />
+        <div className="idMath">{level.id}</div>
+        {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
+        {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
+        {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
+        {(isFirstLevel || isPreviousCompleted) && !level.completed && (
+          <button className="lock1Math" onClick={handleClick}>
+            <FontAwesomeIcon icon={faPlay} />
+          </button>
+        )}
+       </Link>    
   );}
 export default Mathh;
