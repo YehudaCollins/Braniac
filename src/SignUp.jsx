@@ -35,6 +35,22 @@ function SignUp() {
     setShowLogin(!showLogin);
   };
 
+
+  const checkEmailExists = async (email, password) => {
+    try {
+      // בדיקה אם האימייל והסיסמא קימיים במערכת
+      await firebase.auth().signInWithEmailAndPassword(email, password);
+      
+      navigate("/Home");
+    
+    } catch (error) {
+      console.error("Error signing in:", error);
+      alert("Incorrect email or password");
+    }
+  };
+  
+  
+
   const handleSubmit = async (e) => {
     //מונע מהכל להתאפס
     e.preventDefault(); 
@@ -73,7 +89,6 @@ try {
     gender,
     age,
   });
-
       // נכנס לאתר לאחר שהכל הסתיים בהצלחה
       navigate("/Home");
     } catch (error) {
@@ -125,8 +140,14 @@ try {
           {showLogin ? (
             <div>
               <h2 className="textmain">Login</h2>
-              <form className='Login' onSubmit={handleSubmit}>
-                <input
+              {/* גם פה שיניתי */}
+              <form className='Login' onSubmit={(e) => {
+                e.preventDefault();
+                const email = e.target.elements.email.value;
+                const password = e.target.elements.password.value;
+                checkEmailExists(email, password);
+                }}>             
+               <input
                   className='inpet'
                   type="email"
                   name="email"
@@ -138,7 +159,7 @@ try {
                   name="password"
                   placeholder="Password"
                 />
-                <button className='buttonlogin' type="submit">Login</button>
+                <button className='buttonlogin' type="Submit" >Login</button>
                 <p><button className='buttonlogin' onClick={toggleForm}>Don't have an account? </button></p>
               </form>
             </div>
@@ -208,3 +229,5 @@ try {
 }
 
 export default SignUp;
+
+
