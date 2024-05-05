@@ -1,107 +1,104 @@
 import React, { useState, useEffect } from "react";
+import { useLocation } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'; // Added Link for routing
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSignOut } from '@fortawesome/free-solid-svg-icons';
 import UnityGameComponent from './UnityGameComponent';
 import Card from "./card";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import cards from "./cardDeta";
 import Mathh from "./Math";
-import English from "./English";   
-import Shapes from "./shapes"; 
+import English from "./English";
+import Shapes from "./shapes";
 import SignUp from "./SignUp";
 import "./SignUp.css";
-import "./App.css"; 
+import "./App.css";
 import "./levels.css";
 import "./unity.css";
 
-
-
 function App() {
+  const [userData, setUserData] = useState(null);
 
-  // const [userName, setUserName] = useState("");
-  // const [userGold, setUserGold] = useState("");
-  // const [loading, setLoading] = useState(true);
+  const firebaseConfig = {
+    apiKey: "AIzaSyAQcK6mjBoOow8p0vw0_IHjAXtZIYvksWk",
+    authDomain: "braniac-f455c.firebaseapp.com",
+    databaseURL: "https://braniac-f455c-default-rtdb.firebaseio.com",
+    projectId: "braniac-f455c",
+    storageBucket: "braniac-f455c.appspot.com",
+    messagingSenderId: "404956277459",
+    appId: "1:404956277459:web:67f78249db064dad944226"
+  };
 
-    const firebaseConfig = {
-      apiKey: "AIzaSyAQcK6mjBoOow8p0vw0_IHjAXtZIYvksWk",
-      authDomain: "braniac-f455c.firebaseapp.com",
-      databaseURL: "https://braniac-f455c-default-rtdb.firebaseio.com",
-      projectId: "braniac-f455c",
-      storageBucket: "braniac-f455c.appspot.com",
-      messagingSenderId: "404956277459",
-      appId: "1:404956277459:web:67f78249db064dad944226"
+  useEffect(() => {
+    const fetchUserData = async () => {
+      const userId = localStorage.getItem('userId');
+      if (userId) {
+        const database = firebase.database();
+        const userRef = database.ref(`users/${userId}`);
+        try {
+          const snapshot = await userRef.once('value');
+          const userData = snapshot.val();
+          if (userData) {
+            setUserData(userData);
+          }
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+      }
     };
+  
+    fetchUserData();
+  }, []);
 
-    if (!firebase.apps.length) {
-      firebase.initializeApp(firebaseConfig);
-    }
+  if (!firebase.apps.length) {
+    firebase.initializeApp(firebaseConfig);
+  }
+  
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<SignUp />} />
+        <Route path="/unity" element={<UnityGameComponent />} />
+        <Route path="/Home" element={<Home setUserData={setUserData} />} />
+        <Route path="/Math" element={<Mathh />} />
+        <Route path="/English" element={<English />} />
+        <Route path="/Shapes" element={<Shapes />} />
+      </Routes>
+    </Router>
+  );
+}
 
-  //   if (!firebase.apps.length) {
-  //     firebase.initializeApp(firebaseConfig);
-  //   }
+function Home({ setUserData }) {
+  const { state } = useLocation();
+  const { userData } = state || {};
+  const { name, age, gender } = userData || {};
+  const navigate = useNavigate();
 
-
-  //   const usersRef = firebase.database().ref("users");
-
-    
-  //   const onDataChange = (snapshot) => {
-  //     const userData = snapshot.val();
-  //     console.log("Database:", userData); // Log database object
-  //     if (userData) {
-  //       const userId = Object.keys(userData)[0];
-  //       const user = userData[userId];
-  //       if (user && user.name) {
-  //         setUserName(user.name);
-  //         setUserGold(user.gold);
-  //       }
-  //     }
-  //     setLoading(false);
-  //   };
-
-  //   usersRef.on("value", onDataChange);
-
-  //   return () => {
-  //     usersRef.off("value", onDataChange);
-  //   };
-  // }, []);
-
+  const handleLogout = () => {
+    firebase.auth().signOut().then(() => {
+      // Reset the userData state when the user logs out
+      setUserData(null);
+      // Remove the user's unique ID from localStorage
+      localStorage.removeItem('userId');
+      navigate("/");
+    }).catch((error) => {
+      console.error("Error signing out:", error);
+    });
+  };
   const backgroundImageStyle = {
     backgroundImage: `url("https://wallpaper-house.com/data/out/4/wallpaper2you_41215.jpg")`,
   };
-  
 
-  
   return (
- 
-      <Router>
-        <Routes>
-          <Route path="/" element={<SignUp />} />
-          <Route path="/unity" element={<UnityGameComponent />} />
-          <Route path="/Home" element={<Home />} />
-          <Route path="/Math" element={<Mathh />} />
-          <Route path="/English" element={<English />} />
-          <Route path="/Shapes" element={<Shapes />} />
-        </Routes>
-      </Router>
-    
-  );
-
-     
-  function Home() {
-    const navigate = useNavigate();
-    const handleLogout = () => {
-      firebase.auth().signOut().then(() => {
-        navigate("/");
-      }).catch((error) => {
-        console.error("Error signing out:", error);
-      });
-    };
-    
-    return(
-      <div className="main" style={backgroundImageStyle}>
+    <div className="main" style={backgroundImageStyle}>
       <div className="titel1">
         <div className="titel">
+          <div className="textname">        
+            <button className='LogOut' onClick={handleLogout}><FontAwesomeIcon icon={faSignOut} /></button>
+              {name}
+          </div>
           <div className="text">Brainiac</div>
         </div>
       </div>
@@ -111,11 +108,11 @@ function App() {
         ))}
       </div>
       <div className="bottem">
-        {/* <div className="jj">User from Unity: <div className="h">{userName} {userGold} */}
-        <button onClick={handleLogout}>Log Out</button>
-        </div></div>
-    );
-  }
+        <div>Age: {age}</div>
+        <div>Gender: {gender}</div>
+      </div>
+    </div>
+  );
 }
 
 export default App;

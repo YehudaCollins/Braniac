@@ -68,3 +68,32 @@ body, html {
     color: white;
     
 }
+
+.textname{
+    position: absolute;
+    color: white;
+    font-size:20px;
+    font-family:'Times New Roman', Times, serif;
+    left: 12vw;
+    display: flex;
+    flex-direction: row;
+}
+
+.LogOut{
+    background-color: rgb(108, 81, 81);
+    outline: none;
+    border: none;
+    color: white;
+    width: 50px; /* Adjust the width and height as needed */
+    height: 50px;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+.LogOut:hover{
+
+    transform: scale(1.4);
+    background-color: rgb(108, 81, 81);
+
+
+}

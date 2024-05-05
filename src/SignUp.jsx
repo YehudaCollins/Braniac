@@ -7,6 +7,7 @@ import "firebase/compat/database";
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
   const [showForm, setShowForm] = useState(false);
+  const [userData, setUserData] = useState(null); // Add this line
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,39 +45,22 @@ function SignUp() {
     setShowLogin(!showLogin);
   };
 
-  const checkEmailExists = async (email, password) => {
+  const login = async (email, password) => {
     try {
       const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
       const user = userCredential.user;
   
       if (user && user.emailVerified) {
-        navigate("/Home");
+        navigate("/Home", { state: { userData } });
       } else {
         alert("Account exists but is not verified.")
       }
     } catch (error) {
-      if (error.code === "auth/user-not-found") {
-        alert("Account does not exist.");
-      } else {
-        console.error("Error signing in:", error);
-        alert("Incorrect email or password.");
-      }
+      console.error("Authentication error:", error);
+      alert(error.message);
     }
   };
-  
-  
-  const checkEmailVerified = async (user) => {
-    if (user && user.emailVerified) {
-      navigate("/Home");
-    } else {
-      setTimeout(async () => {
-        const currentUser = firebase.auth().currentUser;
-        await currentUser.reload();
-        checkEmailVerified(currentUser);
-      }, 1000); // Check every second
-    }
-  };
-  
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -93,25 +77,42 @@ function SignUp() {
       return;
     }
   
+   
     try {
       const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
       const user = userCredential.user;
   
       await user.sendEmailVerification();
       alert("Please verify your email address.");
-
+  
       const database = firebase.database();
       const usersRef = database.ref("users");  
+      const newUserRef = usersRef.child(name); // Use the name as the child key
   
-      //שם לכל אחד שם מפתח על פי האימייל
-      const newUserRef = usersRef.child(name); 
-      
-      await newUserRef.set({
+      const userData = {
         email,
         name,
         gender,
         age,
-      });
+      };
+  
+      await newUserRef.set(userData); 
+  
+      // Store the user details in the component state
+      setUserData(userData);
+  
+      const checkEmailVerified = async (user) => {
+        if (user && user.emailVerified) {
+          // Pass the user details to the /Home route
+          navigate("/Home", { state: { userData } });
+        } else {
+          setTimeout(async () => {
+            const currentUser = firebase.auth().currentUser;
+            await currentUser.reload();
+            checkEmailVerified(currentUser);
+          }, 1000); // Check every second
+        }
+      };
   
       checkEmailVerified(user); // Start checking email verification
     } catch (error) {
@@ -191,7 +192,7 @@ function SignUp() {
                 e.preventDefault();
                 const email = e.target.elements.email.value;
                 const password = e.target.elements.password.value;
-                checkEmailExists(email, password);
+                login(email, password);
                 }}>             
                <input
                   className='inpet'
