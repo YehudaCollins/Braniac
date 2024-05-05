@@ -24,9 +24,18 @@ function SignUp() {
       firebase.initializeApp(firebaseConfig);
     }
 
-    firebase.auth();
-  }, []);
 
+    // Check if user is already signed in
+    firebase.auth().onAuthStateChanged(user => {
+      if (user && user.emailVerified) {
+        navigate("/Home");
+      }
+
+
+
+      
+    });
+  }, []);
   const handleClick = () => {
     setShowForm(true);
   };
@@ -35,68 +44,104 @@ function SignUp() {
     setShowLogin(!showLogin);
   };
 
-
   const checkEmailExists = async (email, password) => {
     try {
-      // בדיקה אם האימייל והסיסמא קימיים במערכת
-      await firebase.auth().signInWithEmailAndPassword(email, password);
-      
-      navigate("/Home");
-    
+      const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+  
+      if (user && user.emailVerified) {
+        navigate("/Home");
+      } else {
+        alert("Account exists but is not verified.")
+      }
     } catch (error) {
-      console.error("Error signing in:", error);
-      alert("Incorrect email or password");
+      if (error.code === "auth/user-not-found") {
+        alert("Account does not exist.");
+      } else {
+        console.error("Error signing in:", error);
+        alert("Incorrect email or password.");
+      }
     }
   };
   
   
+  const checkEmailVerified = async (user) => {
+    if (user && user.emailVerified) {
+      navigate("/Home");
+    } else {
+      setTimeout(async () => {
+        const currentUser = firebase.auth().currentUser;
+        await currentUser.reload();
+        checkEmailVerified(currentUser);
+      }, 1000); // Check every second
+    }
+  };
+  
 
   const handleSubmit = async (e) => {
-    //מונע מהכל להתאפס
-    e.preventDefault(); 
-    
-    // מכניס את המידע
-  const email = e.target.elements.email.value;
-  const password = e.target.elements.password.value;
-  const name = e.target.elements.name?.value || "";
-  const gender = e.target.elements.gender?.value || "";
-  const age = e.target.elements.age?.value || "";
-
-  const verifyPassword = e.target.elements.verifyPassword.value;
-
-  // בדיקה אם הסיסמה ואימות הסיסמה תואמים
-  if (password !== verifyPassword) {
-  alert("The password does not match");
-  return;
-  }
-
-  try {
-    // יוצר איימייל חדש עם ססמה
-    const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
-    const user = userCredential.user;
-
-
-    // מכניס את המידע ומכניס בשם יוזרס
-    const database = firebase.database();
-    const usersRef = database.ref("users");  
-
-  //שם לכל אחד שם מפתח על פי האימייל
-  const newUserRef = usersRef.child(name); 
+    e.preventDefault();
+    const email = e.target.elements.email.value;
+    const password = e.target.elements.password.value;
+    const name = e.target.elements.name?.value || "";
+    const gender = e.target.elements.gender?.value || "";
+    const age = e.target.elements.age?.value || "";
   
-  await newUserRef.set({
-    email,
-    name,
-    gender,
-    age,
-  });
+    const verifyPassword = e.target.elements.verifyPassword.value;
+  
+    if (password !== verifyPassword) {
+      alert("The password does not match");
+      return;
+    }
+  
+    try {
+      const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+      const user = userCredential.user;
+  
+      await user.sendEmailVerification();
+      alert("Please verify your email address.");
 
-      // נכנס לאתר לאחר שהכל הסתיים בהצלחה
-      navigate("/Home");
+      const database = firebase.database();
+      const usersRef = database.ref("users");  
+  
+      //שם לכל אחד שם מפתח על פי האימייל
+      const newUserRef = usersRef.child(name); 
+      
+      await newUserRef.set({
+        email,
+        name,
+        gender,
+        age,
+      });
+  
+      checkEmailVerified(user); // Start checking email verification
     } catch (error) {
       console.error("Authentication error:", error);
       alert(error.message);
     }
   };
+
+  // const handleResendVerification = async () => {
+  //   let retries = 3; // Number of retry attempts
+  //   let delay = 1000; // Initial delay in milliseconds
+  
+  //   while (retries > 0) {
+  //     try {
+  //       const currentUser = firebase.auth().currentUser;
+  //       await currentUser.sendEmailVerification();
+  //       alert("Verification email sent. Please check your email.");
+  //       return; // Exit the function if email sent successfully
+  //     } catch (error) {
+  //       console.error("Error resending verification email:", error);
+  //       retries--;
+  //       await new Promise(resolve => setTimeout(resolve, delay)); // Wait before retrying
+  //       delay *= 2; // Double the delay for each retry
+  //     }
+  //   }
+  
+  //   alert("Failed to resend verification email after multiple attempts. Please try again later.");
+  // };
+  
+  
   const backgroundImageStyle = {
     backgroundImage: 'url("https://static.vecteezy.com/system/resources/thumbnails/027/875/773/original/dark-futuristic-low-poly-surface-background-with-the-gentle-motion-of-black-polygonal-triangle-shapes-and-glowing-red-neon-light-4k-and-looping-technology-motion-background-animation-video.jpg")',
   };
@@ -218,6 +263,9 @@ function SignUp() {
                   name="verifyPassword"
                   placeholder="Verify password"
                 />
+                {/* <button className="resendButton" onClick={handleResendVerification}>
+                  Resend Verification Email
+                </button> */}
                 <button className="buttonsignup" type="submit" >SignUp</button>
                 <p><button className="buttonsignup" onClick={toggleForm}>Already have an account?</button></p>
               </form>
@@ -230,5 +278,7 @@ function SignUp() {
 }
 
 export default SignUp;
+
+
 
 
