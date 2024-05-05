@@ -18,20 +18,24 @@ import "./unity.css";
 
 
 function App() {
+
   // const [userName, setUserName] = useState("");
   // const [userGold, setUserGold] = useState("");
   // const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   const firebaseConfig = {
-  //     apiKey: "AIzaSyAQcK6mjBoOow8p0vw0_IHjAXtZIYvksWk",
-  //     authDomain: "braniac-f455c.firebaseapp.com",
-  //     databaseURL: "https://braniac-f455c-default-rtdb.firebaseio.com",
-  //     projectId: "braniac-f455c",
-  //     storageBucket: "braniac-f455c.appspot.com",
-  //     messagingSenderId: "404956277459",
-  //     appId: "1:404956277459:web:67f78249db064dad944226"
-  //   };
+    const firebaseConfig = {
+      apiKey: "AIzaSyAQcK6mjBoOow8p0vw0_IHjAXtZIYvksWk",
+      authDomain: "braniac-f455c.firebaseapp.com",
+      databaseURL: "https://braniac-f455c-default-rtdb.firebaseio.com",
+      projectId: "braniac-f455c",
+      storageBucket: "braniac-f455c.appspot.com",
+      messagingSenderId: "404956277459",
+      appId: "1:404956277459:web:67f78249db064dad944226"
+    };
+
+    if (!firebase.apps.length) {
+      firebase.initializeApp(firebaseConfig);
+    }
 
   //   if (!firebase.apps.length) {
   //     firebase.initializeApp(firebaseConfig);
