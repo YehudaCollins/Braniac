@@ -7,7 +7,7 @@ import "firebase/compat/database";
 function SignUp() {
   const [showLogin, setShowLogin] = useState(true);
   const [showForm, setShowForm] = useState(false);
-  const [userData, setUserData] = useState(null); // Add this line
+  const [userData, setUserData] = useState(null); 
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -26,7 +26,6 @@ function SignUp() {
     }
 
 
-    // Check if user is already signed in
     firebase.auth().onAuthStateChanged(user => {
       if (user && user.emailVerified) {
         navigate("/Home");
@@ -87,7 +86,7 @@ function SignUp() {
   
       const database = firebase.database();
       const usersRef = database.ref("users");  
-      const newUserRef = usersRef.child(name); // Use the name as the child key
+      const newUserRef = usersRef.child(name); 
   
       const userData = {
         email,
@@ -98,7 +97,6 @@ function SignUp() {
   
       await newUserRef.set(userData); 
   
-      // Store the user details in the component state
       setUserData(userData);
   
       const checkEmailVerified = async (user) => {
@@ -110,13 +108,13 @@ function SignUp() {
             const currentUser = firebase.auth().currentUser;
             await currentUser.reload();
             checkEmailVerified(currentUser);
-          }, 1000); // Check every second
+          }, 1000); 
         }
       };
   
-      checkEmailVerified(user); // Start checking email verification
+      checkEmailVerified(user); 
     } catch (error) {
-      console.error("Authentication error:", error);
+      console.error("not work-error:", error);
       alert(error.message);
     }
   };
@@ -167,7 +165,7 @@ function SignUp() {
               <div className="colors">
                 <h3 className="color1">English</h3>
                 <h3 className="color2">Math</h3>
-                <h3 className="color3">shapes</h3>
+                <h3 className="color3">Shapes</h3>
               </div>
               <p className="Websitedetails-text2">
                 Brainiac is a special website that helps kids learn through fun games. Parents and teachers can make their own exercises, and the website turns them into super cool games that help kids get better at things like English, math, and shapes - all while having a great time playing!
@@ -279,7 +277,5 @@ function SignUp() {
 }
 
 export default SignUp;
-
-
 
 
