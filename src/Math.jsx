@@ -1,44 +1,86 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
+import { useUnityContext } from "react-unity-webgl";
 import "./levels.css";
+
+function handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance) {
+  
+  if (!Array.isArray(levelData)) {
+    console.error('levelData is not an array');
+    return;
+  }
+
+  if (levelIndex < 0 || levelIndex >= levelData.length) {
+    console.error('Invalid levelIndex:', levelIndex);
+    return;
+  }
+
+  const updatedLevels = [...levelData];
+  updatedLevels[levelIndex].completed = true;
+
+  const nextLockedLevelIndex = updatedLevels.findIndex(level => level.lock && !level.completed);
+  if (nextLockedLevelIndex !== -1) {
+    updatedLevels[nextLockedLevelIndex].lock = false;
+    updatedLevels[nextLockedLevelIndex - 1].completed = true;
+  }
+
+  console.log('Updated Levels:', updatedLevels); // Debug statement
+
+
+  setLevelData(updatedLevels);
+
+  if (unityInstance) {
+    unityInstance.SendMessageToUnity("UnityMessageReceiver", "LevelCompleted", levelIndex);
+  }
+}
+
 
 function Mathh() {
   const backgroundImageStyle = {
     backgroundImage: `url("https://e0.pxfuel.com/wallpapers/81/418/desktop-wallpaper-abstract-technological-background-made-of-black-hexagons-with-purple-glow-seamless-loop-motion-background-dark-hexagon.jpg")`,
   };
 
-  const levels = [];
-  levels.push({ id: 1, lock: false, completed: false });
-  for (let i = 2; i <= 20; i++) {
-    levels.push({ id: i, lock: true, completed: false });
-  }
+  const [levelData, setLevelData] = useState([]);
+
+  useEffect(() => {
+    // Retrieve the level data from Local Storage when the component mounts
+    const storedLevelData = localStorage.getItem("levelData");
+    if (storedLevelData) {
+      setLevelData(JSON.parse(storedLevelData));
+    } else {
+      // Initialize the level data if it doesn't exist in Local Storage
+      const initialLevels = [];
+      initialLevels.push({ id: 1, lock: false, completed: false });
+      for (let i = 2; i <= 20; i++) {
+        initialLevels.push({ id: i, lock: true, completed: false });
+      }
+      setLevelData(initialLevels);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Store the level data in Local Storage whenever it changes
+    localStorage.setItem("levelData", JSON.stringify(levelData));
+  }, [levelData]);
 
   const [isMovingLevels, setIsMovingLevels] = useState(false);
   const [currentLevelIndex, setCurrentLevelIndex] = useState(0);
-  const [levelData, setLevelData] = useState(levels);
 
-  //מזיז שלבים ימינה
+  const { unityInstance } = useUnityContext();
   const moveLevelsRight = () => {
     setCurrentLevelIndex((prevIndex) => Math.min(prevIndex + 10, levelData.length - 10));
     setIsMovingLevels(true);
   };
 
-  //מזיז שלבים שמאלה
   const moveLevelsLeft = () => {
     setCurrentLevelIndex((prevIndex) => Math.max(prevIndex - 10, 0));
     setIsMovingLevels(false);
   };
 
-  // מסיים לבל? פותח תלבל הבא
-  const levelCompleted = (levelIndex) => {
-    const updatedLevels = [...levelData];
-    updatedLevels[levelIndex].completed = true;
-    if (levelIndex < updatedLevels.length - 1) {
-      updatedLevels[levelIndex + 1].lock = false;
-    }
-    setLevelData(updatedLevels);
+  const handleLevelCompleted = (levelIndex) => {
+    handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance);
   };
 
   return (
@@ -51,7 +93,7 @@ function Mathh() {
               level={level}
               levels={levelData}
               index={currentLevelIndex + index}
-              levelCompleted={levelCompleted}
+              levelCompleted={handleLevelCompleted}
             />
           ))}
         </div>
@@ -61,6 +103,9 @@ function Mathh() {
           </button>
           <button className="buttonright" onClick={moveLevelsRight}>
             <FontAwesomeIcon className="buttonright" icon={faChevronRight} />
+          </button>
+          <button className="complete-level-button" onClick={() => handleLevelCompleted(currentLevelIndex)}>
+            Complete Level
           </button>
         </div>
       </div>
@@ -72,6 +117,7 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const backgroundImageStyle = {
     backgroundImage: `url("https://i.pinimg.com/736x/d6/fd/c8/d6fdc83f651e1c1460625cd25da61cd0.jpg")`,
   };
+
   const handleClick = () => {
     if (!level.lock) {
       levelCompleted(index);
@@ -108,3 +154,4 @@ function InsideCard({ level, levels, index, levelCompleted }) {
 }
 
 export default Mathh;
+export {handleLevelCompletion }; 

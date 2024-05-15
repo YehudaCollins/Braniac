@@ -8,7 +8,7 @@ import Card from "./card";
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
 import cards from "./cardDeta";
-import Mathh from "./Math";
+import Mathh, { handleLevelCompletion } from './Math';
 import English from "./English";
 import Shapes from "./shapes";
 import SignUp from "./SignUp";
@@ -59,7 +59,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<SignUp />} />
-        <Route path="/unity" element={<UnityGameComponent />} />
+        <Route path="/unity" element={ <UnityGameComponent handleLevelCompletion={handleLevelCompletion} />} />
         <Route path="/Home" element={<Home setUserData={setUserData} />} />
         <Route path="/Math" element={<Mathh />} />
         <Route path="/English" element={<English />} />
