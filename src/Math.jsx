@@ -5,37 +5,55 @@ import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@f
 import { useUnityContext } from "react-unity-webgl";
 import "./levels.css";
 
+// function handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance) {
+  
+//   const updatedLevels = [...levelData];
+//   const nextLockedLevelIndex = updatedLevels.findIndex(level => level.lock && !level.completed);
+//   console.log([levelIndex]);
+//   if (nextLockedLevelIndex !== -1) {
+//       updatedLevels[nextLockedLevelIndex].lock = false;
+//       updatedLevels[nextLockedLevelIndex - 1].completed = true;    
+//   }
+//   else{
+//     console.warn('Cannot complete the current level because the previous level is not completed.');
+//     return;
+//   }
+
+//   console.log('Updated Levels:', updatedLevels); // Debug statement
+
+
+//   setLevelData(updatedLevels);
+
+//   if (unityInstance) {
+//     unityInstance.SendMessageToUnity("UnityMessageReceiver", "LevelCompleted", levelIndex);
+//   }
+// }
+
+
+
 function handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance) {
   
-  if (!Array.isArray(levelData)) {
-    console.error('levelData is not an array');
-    return;
+    const updatedLevels = [...levelData];
+    const nextLockedLevelIndex = updatedLevels.findIndex(level => level.lock && !level.completed);
+    console.log([levelIndex]);
+    if (nextLockedLevelIndex !== -1) {
+        updatedLevels[nextLockedLevelIndex].lock = false;
+        updatedLevels[nextLockedLevelIndex - 1].completed = true;    
+    }
+    else{
+      console.warn('Cannot complete the current level because the previous level is not completed.');
+      return;
+    }
+  
+    console.log('Updated Levels:', updatedLevels); // Debug statement
+  
+  
+    setLevelData(updatedLevels);
+  
+    if (unityInstance) {
+      unityInstance.SendMessageToUnity("UnityMessageReceiver", "LevelCompleted", levelIndex);
+    }
   }
-
-  if (levelIndex < 0 || levelIndex >= levelData.length) {
-    console.error('Invalid levelIndex:', levelIndex);
-    return;
-  }
-
-  const updatedLevels = [...levelData];
-  updatedLevels[levelIndex].completed = true;
-
-  const nextLockedLevelIndex = updatedLevels.findIndex(level => level.lock && !level.completed);
-  if (nextLockedLevelIndex !== -1) {
-    updatedLevels[nextLockedLevelIndex].lock = false;
-    updatedLevels[nextLockedLevelIndex - 1].completed = true;
-  }
-
-  console.log('Updated Levels:', updatedLevels); // Debug statement
-
-
-  setLevelData(updatedLevels);
-
-  if (unityInstance) {
-    unityInstance.SendMessageToUnity("UnityMessageReceiver", "LevelCompleted", levelIndex);
-  }
-}
-
 
 function Mathh() {
   const backgroundImageStyle = {
@@ -118,11 +136,11 @@ function InsideCard({ level, levels, index, levelCompleted }) {
     backgroundImage: `url("https://i.pinimg.com/736x/d6/fd/c8/d6fdc83f651e1c1460625cd25da61cd0.jpg")`,
   };
 
-  const handleClick = () => {
-    if (!level.lock) {
-      levelCompleted(index);
-    }
-  };
+  // const handleClick = () => {
+  //   if (!level.lock) {
+  //     levelCompleted(index);
+  //   }
+  // };
 
   const isFirstLevel = index === 0;
   const isPreviousCompleted = !isFirstLevel && levels[index - 1].completed;
@@ -134,11 +152,11 @@ function InsideCard({ level, levels, index, levelCompleted }) {
       {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
       {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
       {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
-      {(isFirstLevel || isPreviousCompleted) && !level.completed && (
+      {/* {(isFirstLevel || isPreviousCompleted) && !level.completed && (
         <button className="lock1Math" onClick={handleClick}>
           <FontAwesomeIcon icon={faPlay} />
         </button>
-      )}
+      )} */}
     </div>
   );
 

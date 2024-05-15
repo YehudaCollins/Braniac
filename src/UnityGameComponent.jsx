@@ -40,7 +40,6 @@
 // }
 
 // export default UnityGameComponent;
-
 import React, { useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from 'react-router-dom';
@@ -76,7 +75,7 @@ function UnityGameComponent() {
         navigate("/Math");
       } else if (messageType === "CompleteLevel") {
         navigate(-1);
-        handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance);
+          handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance);
       }
     };
 
