@@ -59,8 +59,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/h" element={<SignUp />} />
-        <Route path="/" element={<H/>} />
+        <Route path="/" element={<SignUp />} />
+        <Route path="/h" element={<H/>} />
         <Route path="/unity" element={ <UnityGameComponent handleLevelCompletion={handleLevelCompletion} />} />
         <Route path="/Home" element={<Home setUserData={setUserData} />} />
         <Route path="/Math" element={<Mathh />} />
