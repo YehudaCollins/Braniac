@@ -121,43 +121,66 @@ function H() {
       console.error("Unity is not loaded yet.");
     }
   };
+  const handleStringClick = ()=> {
+    if (isLoaded) {
+      sendMessage('JavascriptHook', 'SetNumber', 56)
+      }
+  }
+  
+  const handleNumberClick = ()=> {
+    if (isLoaded) {
+      sendMessage('JavascriptHook', 'SetString', 'hello')
+      }
+  }
 
   return (
     <div className="unity-main">
-      <div
+<div className="hhh">
+      <button
         style={{
-          border: "solid 1px black",
-          width: "200px",
-          height: "30px",
-          margin: "auto",
-          textAlign: "center",
-          cursor: "pointer",
-          color: "blue",
+          backgroundColor:"red",
+          color: "white",
         }}
         onClick={handleRedClick}
       >
         RED
-      </div>
-      <div
+      </button>
+      <button
         style={{
-          border: "solid 1px black",
-          width: "200px",
-          height: "30px",
-          margin: "auto",
-          textAlign: "center",
-          cursor: "pointer",
-          color: "blue",
+          backgroundColor:"green",
+
+          color: "white",
         }}
         onClick={handleGreenClick}
       >
         GREEN
-      </div>
-      <div onclick="unityInstance.SendMessage('JavascriptHook', 'TintRed')">RED</div>
-    <div onclick="unityInstance.SendMessage('JavascriptHook', 'TintGreen')">GREEN</div>
+      </button>
+
+      <button style={{
+          backgroundColor:"green",
+          color: "white",
+        }} onClick={handleNumberClick}>
+          Number
+          </button>
+    <button style={{
+          backgroundColor:"green",
+
+          color: "white",
+        }} onClick={handleStringClick}>
+          String
+          </button> 
+
+
+
+      {/* <button onclick="unityInstance.SendMessage('JavascriptHook', 'TintRed')">RED</button>
+    <button onclick="unityInstance.SendMessage('JavascriptHook', 'TintGreen')">GREEN</button>
+    <div onclick="unityInstance.SendMessage('JavascriptHook', 'SetNunber', 56)">Number</div>
+    <div onclick="unityInstance.SendMessage('JavascriptHook', 'SetString', 'hello world')">String</div> */}
+
 
     {/* <button onClick={() => unityInstance?.SendMessage("JavascriptHook", "TintRed")} >RED</button>
       <button onClick={() => unityInstance?.SendMessage("JavascriptHook", "TintGreen")}>GREEN</button> */}
-
+</div>
 
       <div>
         <Unity className="unity" unityProvider={unityProvider} />
