@@ -34,9 +34,10 @@ import "./levels.css";
 function handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance) {
   
     const updatedLevels = [...levelData];
-    const nextLockedLevelIndex = updatedLevels.findIndex(level => level.lock && !level.completed);
+ 
+   const nextLockedLevelIndex = updatedLevels.findIndex(level => level.lock && !level.completed );
     console.log([levelIndex]);
-    if (nextLockedLevelIndex !== -1) {
+    if (nextLockedLevelIndex !== -1 ) {
         updatedLevels[nextLockedLevelIndex].lock = false;
         updatedLevels[nextLockedLevelIndex - 1].completed = true;    
     }
