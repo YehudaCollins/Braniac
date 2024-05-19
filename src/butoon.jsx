@@ -152,6 +152,12 @@ function H() {
       >
         GREEN
       </div>
+      <div onclick="unityInstance.SendMessage('JavascriptHook', 'TintRed')">RED</div>
+    <div onclick="unityInstance.SendMessage('JavascriptHook', 'TintGreen')">GREEN</div>
+
+    {/* <button onClick={() => unityInstance?.SendMessage("JavascriptHook", "TintRed")} >RED</button>
+      <button onClick={() => unityInstance?.SendMessage("JavascriptHook", "TintGreen")}>GREEN</button> */}
+
 
       <div>
         <Unity className="unity" unityProvider={unityProvider} />
