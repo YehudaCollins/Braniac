@@ -16,6 +16,7 @@ import "./SignUp.css";
 import "./App.css";
 import "./levels.css";
 import "./unity.css";
+import H from "./butoon";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -58,7 +59,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<SignUp />} />
+        <Route path="/h" element={<SignUp />} />
+        <Route path="/" element={<H/>} />
         <Route path="/unity" element={ <UnityGameComponent handleLevelCompletion={handleLevelCompletion} />} />
         <Route path="/Home" element={<Home setUserData={setUserData} />} />
         <Route path="/Math" element={<Mathh />} />
