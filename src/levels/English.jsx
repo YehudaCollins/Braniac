@@ -108,4 +108,5 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   );
 }
 
+
 export default English;
