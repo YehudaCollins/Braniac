@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import './card.css';
+import '../style/card.css';
 
 function Card({ card }) {
   const getGlowClass = () => {

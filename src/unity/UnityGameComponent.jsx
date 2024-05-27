@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useNavigate } from 'react-router-dom';
-import { handleLevelCompletion } from './Math';
+import { handleLevelCompletion } from '../levels/Math';
+import "../style/unity.css";
+
 
 function UnityGameComponent() {
   const { unityProvider, unityInstance, sendMessageToUnity } = useUnityContext({
@@ -31,6 +33,7 @@ function UnityGameComponent() {
 
       if (messageType === "NavigateToHome") {
         navigate("/Math");
+        console.log("kkk")
       } else if (messageType === "CompleteLevel") {
         navigate(-1);
           handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance);

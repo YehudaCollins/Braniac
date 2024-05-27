@@ -1,12 +1,12 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
-import "./levels.css";
-import { Link } from "react-router-dom";
+import "../style/levels.css";
 
-function Shapes() {
+function English() {
   const backgroundImageStyle = {
-    backgroundImage: `url("https://img.freepik.com/premium-vector/green-cyber-circuit-future-technology-background_42077-3580.jpg")`,
+    backgroundImage: `url("https://w0.peakpx.com/wallpaper/573/411/HD-wallpaper-red-hexagons-3d-art-hexagons-texture-creative-macro-honeycomb-red-hexagons-background-hexagons-textures-red-backgrounds-hexagons-patterns.jpg")`,
   };
 
   const levels = [];
@@ -42,8 +42,8 @@ function Shapes() {
   };
 
   return (
-    <div className="main-Shapes">
-      <div className="main-Shapes-inside" style={backgroundImageStyle}>
+    <div className="main-English">
+      <div className="main-English-inside" style={backgroundImageStyle}>
         <div className={`level-main${isMovingLevels ? " slide-left" : " slide-right"}`}>
           {levelData.slice(currentLevelIndex, currentLevelIndex + 10).map((level, index) => (
             <InsideCard
@@ -70,8 +70,9 @@ function Shapes() {
 
 function InsideCard({ level, levels, index, levelCompleted }) {
   const backgroundImageStyle = {
-    backgroundImage: `url("https://img.freepik.com/free-vector/abstract-golden-particles-net-background_23-2148249923.jpg")`,
+    backgroundImage: `url("https://img.freepik.com/free-vector/abstract-glowing-terrain-line-wallpaper-modern-backdrop-vector_1017-45742.jpg")`,
   };
+
   const handleClick = () => {
     if (!level.lock) {
       levelCompleted(index);
@@ -84,12 +85,12 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   const levelContent = (
     <div className="LevelClick">
       <br />
-      <div className="idMath">{level.id}</div>
-      {level.lock && <div className="lockMath"><FontAwesomeIcon icon={faLock} /></div>}
-      {!level.lock && <div className="lockMath"><FontAwesomeIcon icon={faPlay} /></div>}
-      {level.completed && <div className="endMath"><FontAwesomeIcon icon={faCheckCircle} /></div>}
+      <div className="id">{level.id}</div>
+      {level.lock && <div className="lock"><FontAwesomeIcon icon={faLock} /></div>}
+      {!level.lock && <div className="lock"><FontAwesomeIcon icon={faPlay} /></div>}
+      {level.completed && <div className="end"><FontAwesomeIcon icon={faCheckCircle} /></div>}
       {(isFirstLevel || isPreviousCompleted) && !level.completed && (
-        <button className="lock1Math" onClick={handleClick}>
+        <button className="lock1" onClick={handleClick}>
           <FontAwesomeIcon icon={faPlay} />
         </button>
       )}
@@ -97,7 +98,7 @@ function InsideCard({ level, levels, index, levelCompleted }) {
   );
 
   return (
-    <div className="InsideCardShapes" style={backgroundImageStyle}>
+    <div className="InsideCardEnglish" style={backgroundImageStyle}>
       {!level.lock ? (
         <Link to="/unity" style={{ textDecoration: 'none' }}>{levelContent}</Link>
       ) : (
@@ -106,4 +107,5 @@ function InsideCard({ level, levels, index, levelCompleted }) {
     </div>
   );
 }
-export default Shapes;
+
+export default English;

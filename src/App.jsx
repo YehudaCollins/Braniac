@@ -3,20 +3,17 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSignOut } from '@fortawesome/free-solid-svg-icons';
-import UnityGameComponent from './UnityGameComponent';
-import Card from "./card";
+import UnityGameComponent from './unity/UnityGameComponent';
 import firebase from "firebase/compat/app";
 import "firebase/compat/database";
-import cards from "./cardDeta";
-import Mathh, { handleLevelCompletion } from './Math';
-import English from "./English";
-import Shapes from "./shapes";
-import SignUp from "./SignUp";
-import "./SignUp.css";
-import "./App.css";
-import "./levels.css";
-import "./unity.css";
-import H from "./butoon";
+import Mathh, { handleLevelCompletion } from './levels/Math';
+import cards from "./components/cardDeta";
+import English from "./levels/English";
+import Shapes from "./levels/shapes";
+import Card from "./components/card";
+import SignUp from "./components/SignUp";
+import H from "./components/butoon";
+import "./style/App.css";
 
 function App() {
   const [userData, setUserData] = useState(null);
@@ -59,8 +56,8 @@ function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/h" element={<SignUp />} />
-        <Route path="/" element={<H/>} />
+        <Route path="/" element={<SignUp />} />
+        <Route path="/h" element={<H/>} />
         <Route path="/unity" element={ <UnityGameComponent handleLevelCompletion={handleLevelCompletion} />} />
         <Route path="/Home" element={<Home setUserData={setUserData} />} />
         <Route path="/Math" element={<Mathh />} />

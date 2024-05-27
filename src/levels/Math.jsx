@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faChevronLeft, faChevronRight, faLock, faCheckCircle, faPlay } from '@fortawesome/free-solid-svg-icons';
 import { useUnityContext } from "react-unity-webgl";
-import "./levels.css";
+import "../style/levels.css";
 
 function handleLevelCompletion(levelIndex, levelData, setLevelData, unityInstance) {
   
