@@ -1,0 +1,32 @@
+{
+  "project_info": {
+    "project_number": "404956277459",
+    "firebase_url": "https://braniac-f455c-default-rtdb.firebaseio.com",
+    "project_id": "braniac-f455c",
+    "storage_bucket": "braniac-f455c.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:404956277459:ios:c3c25ecf959bd9f3944226",
+        "android_client_info": {
+          "package_name": "com.DefaultCompany.2DProject"
+        }
+      },
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmljXWicTUU0j1tKnDQzgb9YYKcPg-A98"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 0
+        },
+        "appinvite_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
