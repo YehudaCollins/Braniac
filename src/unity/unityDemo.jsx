@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import { useContext } from 'react';
-import { LevelContext } from '../components/LevelContext';
+import { LevelContext } from './LevelContext';
 
 function UnityDemo() {
   const { levelIndex } = useContext(LevelContext);
@@ -93,3 +93,5 @@ function UnityDemo() {
 }
 
 export default UnityDemo;
+
+
